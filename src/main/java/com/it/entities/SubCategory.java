@@ -35,7 +35,7 @@ public class SubCategory
   @JoinColumn(name = "categoryid", nullable = false)
   private CategoryId categoryId;
   
-  @Column(name = "Image", nullable = false)
+  @Column(name = "Image", nullable = true	)
   private String image;
   
   @Column(name = "Status", nullable = false)

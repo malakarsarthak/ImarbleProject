@@ -26,7 +26,7 @@ public class Brand
   @Column(name = "Title", nullable = false)
   private String title;
   
-  @Column(name = "Image", nullable = false)
+  @Column(name = "Image", nullable = true)
   private String image;
   
   @Column(name = "Status", nullable = false)
