@@ -39,14 +39,14 @@ public class StaffController
    
    //Add Staff
    @PostMapping()
-   public Staff staff(@RequestBody Staff staff)
+   public Staff addStaff(@RequestBody Staff staff)
    {
 	   return staffRepository.save(staff);
    }
    
    //Update Staff
    @PutMapping("/{id}")
-   public Staff staff(@RequestBody Staff staff,@PathVariable Integer id)
+   public Staff updateStaff(@RequestBody Staff staff,@PathVariable Integer id)
    {
 	   Optional<Staff> op = staffRepository.findById(id);
 	   if(op.isPresent())
@@ -61,9 +61,13 @@ public class StaffController
 		   st.setSalaryType(staff.getSalaryType());
 		   st.setBaseSalary(staff.getBaseSalary());
 		   
-		   st.setBranch(staff.getBranch());
-		   st.setUser(staff.getUser());
-		   
+		   if (staff.getBranch() != null && staff.getBranch().getBranchId() != null) {
+			   st.setBranch(staff.getBranch());
+		   }
+		   if(staff.getUser() != null && staff.getUser().getUserId() != null)
+		   {
+			   st.setUser(staff.getUser());
+           }
 		   return staffRepository.save(st);
 	   }
 	   else
