@@ -53,11 +53,11 @@ public class Staff
   private Float baseSalary;
 
   @ManyToOne
-  @JoinColumn(name = "branchid", nullable = false)
+  @JoinColumn(name = "branchid")
   private Branch branch;
   
   @OneToOne
-  @JoinColumn(name = "userid", nullable = false)
+  @JoinColumn(name = "userid")
   private User user;
   
   @OneToMany(mappedBy = "staff")

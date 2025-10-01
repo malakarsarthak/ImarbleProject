@@ -39,7 +39,7 @@ public class Client
    private String type;
    
    @Column(name = "GSTNumber", nullable = false, unique = true) 
-   private Integer gstNumber;
+   private String gstNumber;
    
    @OneToMany(mappedBy = "clientId")
    private List<Purchase> purchases;

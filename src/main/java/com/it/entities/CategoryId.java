@@ -29,7 +29,7 @@ public class CategoryId
   @Column(name = "Description", nullable = false)
   private String description;
   
-  @Column(name = "Image", nullable = false)
+  @Column(name = "Image", nullable = true)
   private String image;
   
   @Column(name = "Status", nullable = false)

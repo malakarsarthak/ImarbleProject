@@ -41,7 +41,7 @@ public class Product
    private String modelNumber;
    
    @Column(name = "Unit", nullable = false)
-   private Float unit;
+   private String unit;
    
    @Column(name = "Description", nullable = true)
    private String description;
@@ -49,7 +49,7 @@ public class Product
    @Column(name = "PricePerUnit", nullable = false)
    private Float priceperUnit;
    
-   @Column(name = "Image", nullable = false)
+   @Column(name = "Image", nullable = true)
    private String image;
    
    @Column(name = "MinStockLevel", nullable = false)
