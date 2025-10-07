@@ -1,8 +1,5 @@
 package com.it.controllers;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,81 +10,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.it.entities.Staff;
-import com.it.repository.StaffRepository;
+import com.it.models.StaffRequestModel;
+import com.it.services.StaffService;
+import com.it.utils.ApiResponse;
+
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/staffs")
 public class StaffController
 {
    @Autowired
-   private StaffRepository staffRepository;
-   
-   //Get All Staff
-   @GetMapping
-   public List<Staff> getAllStaffs()
-   {
-	   return staffRepository.findAll();
-   }
-   
-   //Get Staff By Id
-   @GetMapping("/{id}")
-   public Optional<Staff> getStaffById(@PathVariable Integer id)
-   {
-	  return staffRepository.findById(id);
-   }
+   private StaffService staffService;
    
    //Add Staff
-   @PostMapping()
-   public Staff addStaff(@RequestBody Staff staff)
+   @PostMapping("/add")
+   public ApiResponse addStaff(@Valid @RequestBody StaffRequestModel model)
    {
-	   return staffRepository.save(staff);
+	   return staffService.addStaff(model);
    }
    
    //Update Staff
-   @PutMapping("/{id}")
-   public Staff updateStaff(@RequestBody Staff staff,@PathVariable Integer id)
+   @PutMapping("/update/{id}")
+   public ApiResponse updateStaff(@Valid @RequestBody StaffRequestModel model,@PathVariable Integer id)
    {
-	   Optional<Staff> op = staffRepository.findById(id);
-	   if(op.isPresent())
-	   {
-		   Staff st = op.get();
-		   st.setName(staff.getName());
-		   st.setAddress(staff.getAddress());
-		   st.setMobile(staff.getMobile());
-		   st.setJoiningDate(staff.getJoiningDate());
-		   st.setLeavingDate(staff.getLeavingDate());
-		   st.setType(staff.getType());
-		   st.setSalaryType(staff.getSalaryType());
-		   st.setBaseSalary(staff.getBaseSalary());
-		   
-		   if (staff.getBranch() != null && staff.getBranch().getBranchId() != null) {
-			   st.setBranch(staff.getBranch());
-		   }
-		   if(staff.getUser() != null && staff.getUser().getUserId() != null)
-		   {
-			   st.setUser(staff.getUser());
-           }
-		   return staffRepository.save(st);
-	   }
-	   else
-	   {
-		   return null;
-	   }
+	   return staffService.updateStaff(id, model);
    }
    
-   @DeleteMapping("/{id}")
-   public String deleteStaff(@PathVariable Integer id)
+   //Get Staff By Id
+   @GetMapping("/get/{id}")
+   public ApiResponse getStaffById(@PathVariable Integer id)
    {
-	  Optional<Staff> op = staffRepository.findById(id);
-	  if(op.isPresent())
-	  {
-		  staffRepository.deleteById(id);
-		  return "Staff is deleted and its id is " + id;
-	  }
-	  else
-	  {
-		  return "Staff Not Found";
-	  }
+	   return staffService.getStaffById(id);
+   }
+   
+   //Get All Staff
+   @GetMapping("/getAll")
+   public ApiResponse getAllStaff()
+   {
+	   return staffService.getAllStaff();
+   }
+   
+   @DeleteMapping("/delete/{id}")
+   public ApiResponse deleteStaffById(@PathVariable Integer id)
+   {
+	 return staffService.deleteStaffById(id);
    }
 }

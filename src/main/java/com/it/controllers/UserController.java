@@ -31,7 +31,7 @@ public class UserController
    @Autowired
    private UserRepository userRepository;
    
-   //Register user
+   //Register user	
    @PostMapping("/register")
    public ApiResponse registerUser(@Valid @RequestBody RegisterRequestModel model)
    {

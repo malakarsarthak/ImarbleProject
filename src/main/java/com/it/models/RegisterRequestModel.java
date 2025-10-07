@@ -30,4 +30,6 @@ public class RegisterRequestModel
   @NotNull(message = "Role Not Null")
   @NotEmpty(message = "Role  Not Empty")
   private String role;
+  
+
 }
