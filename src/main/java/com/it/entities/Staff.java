@@ -3,6 +3,7 @@ package com.it.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -60,15 +61,16 @@ public class Staff
   @JoinColumn(name = "userid")
   private User user;
   
-  @OneToMany(mappedBy = "staff")
+  @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<StaffAttendance> satffAttendance;
   
-  @OneToMany(mappedBy = "staff")
+  @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<StaffSalary> staffSalary;
   
-  @OneToMany(mappedBy = "staff")
+  @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<StaffAdvanced> staffAdvanced;
   
-  @OneToMany(mappedBy = "dispatcher")
+  @OneToMany(mappedBy = "dispatcher", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<SalesDispatch> salesDispatchs;
+
 }
