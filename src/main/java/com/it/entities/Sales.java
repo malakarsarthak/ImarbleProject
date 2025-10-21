@@ -31,7 +31,7 @@ public class Sales
   private Client clientid;
   
   @Column(name = "SalesType", nullable = false)
-  private String Salestype;
+  private String salestype;
   
   @Column(name = "SalesDate", nullable = false)
   private LocalDate salesDate;

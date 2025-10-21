@@ -117,8 +117,13 @@ public class BranchService
 		 Optional<Branch> op = branchRepository.findById(id);
 		 if(op.isPresent())
 		 {
-			 branchRepository.delete(op.get());
-			 return new ApiResponse(true,"Branch Deleted Successfully",null);
+			 Branch br = op.get();
+			 if(br.getStaff()!=null && !br.getStaff().isEmpty())
+			 {
+			    return new ApiResponse(false,"Cannot delete : Staff exist under this branch !",null);	 
+			 }
+			 branchRepository.delete(br);
+			 return new ApiResponse(true,"Branch deleted successfully",null);
 		 }
 		 else
 		 {

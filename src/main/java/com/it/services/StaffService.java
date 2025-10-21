@@ -164,12 +164,21 @@ public class StaffService
 	  try 
 	  {
 		Optional<Staff> op = staffRepository.findById(id);
-		if(op.isEmpty()) 
+		if(op.isPresent()) 
+		{
+			Staff st = op.get();
+			
+			st.setBranch(null);
+			st.setUser(null);
+			staffRepository.save(st);
+			staffRepository.deleteById(id);
+			
+			return new ApiResponse(true,"Staff Deleted!",null);
+		}
+		else
 		{
 			return new ApiResponse(false,"Staff Not Found !",null);
 		}
-		staffRepository.delete(op.get());
-		return new ApiResponse(true,"Staff Deleted Successfully",null);
 	  } 
 	  catch (Exception e) 
 	  {

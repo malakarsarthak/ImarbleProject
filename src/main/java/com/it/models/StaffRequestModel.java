@@ -46,7 +46,7 @@ public class StaffRequestModel
    private LocalDate joiningDate;
    
   
-   @JsonFormat(pattern = "dd/MM/yyyy") 
+   @JsonFormat(pattern = "yyyy-MM-dd") 
    private LocalDate leavingDate;
    
    @NotNull(message = "Staff User Id  Not Null")

@@ -17,8 +17,19 @@ public class AppSecurity
    {
 	   http.csrf(ob->ob.disable())
 	       .authorizeHttpRequests(req->
-	       req.requestMatchers("/users/register","/users/login").permitAll()
-	       .anyRequest().authenticated()
+	       req
+	       .requestMatchers("/users/login").permitAll()
+	       .requestMatchers("/users/register","/users/all").hasRole("ADMIN")
+	       .requestMatchers("/branch/add", "/branch/update/**").hasAnyRole("ADMIN", "MANAGER")
+           .requestMatchers("/branch/delete/**").hasRole("ADMIN")
+           .requestMatchers("/branch/get/**", "/branch/getAll").hasAnyRole("ADMIN","MANAGER","RECEPTIONIST")
+           .requestMatchers("/staffs/add", "/staffs/update/**").hasAnyRole("ADMIN","MANAGER")
+           .requestMatchers("/staffs/delete/**").hasRole("ADMIN")
+           .requestMatchers("/staffs/get/**", "/staffs/getAll").hasAnyRole("ADMIN","MANAGER","RECEPTIONIST")
+           .requestMatchers("/sales/add", "/sales/update/**").hasAnyRole("ADMIN", "MANAGER")
+           .requestMatchers("/sales/delete/**").hasRole("ADMIN")
+           .requestMatchers("/sales/get/**", "/sales/getAll").hasAnyRole("ADMIN", "MANAGER", "RECEPTIONIST")
+           .anyRequest().authenticated()
 	       );
 	       http.addFilterBefore(authFilter,UsernamePasswordAuthenticationFilter.class);
 	       return http.build();

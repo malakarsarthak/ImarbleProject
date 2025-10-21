@@ -1,4 +1,4 @@
-	package com.it.controllers;
+package com.it.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,52 +10,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.it.models.StaffRequestModel;
-import com.it.services.StaffService;
+import com.it.models.SalesRequestModel;
+import com.it.services.SalesService;
 import com.it.utils.ApiResponse;
-
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/staffs")
-public class StaffController
+@RequestMapping("/sales")
+public class SalesController 
 {
    @Autowired
-   private StaffService staffService;
+   private SalesService salesService;
    
-   //Add Staff
+   //Add Sales
    @PostMapping("/add")
-   public ApiResponse addStaff(@Valid @RequestBody StaffRequestModel model)
+   public ApiResponse addSales(@Valid @RequestBody SalesRequestModel model)
    {
-	   return staffService.addStaff(model);
+	   return salesService.addSales(model);
    }
    
-   //Update Staff
+   //Update Sales
    @PutMapping("/update/{id}")
-   public ApiResponse updateStaff(@Valid @RequestBody StaffRequestModel model,@PathVariable Integer id)
+   public ApiResponse updateSales(@Valid @RequestBody SalesRequestModel model,@PathVariable Integer id)
    {
-	   return staffService.updateStaff(id, model);
+	   return salesService.updateSales(id, model);
    }
    
-   //Get Staff By Id
+   //Get Sales By Id
    @GetMapping("/get/{id}")
-   public ApiResponse getStaffById(@PathVariable Integer id)
+   public ApiResponse getSalesById(@PathVariable Integer id)
    {
-	   return staffService.getStaffById(id);
+	   return salesService.getSalesById(id);
    }
    
-   //Get All Staff
+   //Get All Sales
    @GetMapping("/getAll")
-   public ApiResponse getAllStaff()
+   public ApiResponse getAllSales()
    {
-	   return staffService.getAllStaff();
+	   return salesService.salesGetAll();
    }
    
-   //Delete Staff
+   //Delete Sales
    @DeleteMapping("/delete/{id}")
-   public ApiResponse deleteStaffById(@PathVariable Integer id)
+   public ApiResponse deleteSales(@PathVariable Integer id)
    {
-	 return staffService.deleteStaffById(id);
+	   return salesService.deleteSales(id);
    }
 }

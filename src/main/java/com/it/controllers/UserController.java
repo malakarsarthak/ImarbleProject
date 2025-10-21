@@ -3,6 +3,7 @@ package com.it.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class UserController
    
    //Register user	
    @PostMapping("/register")
-   public ApiResponse registerUser(@Valid @RequestBody RegisterRequestModel model)
+   public ApiResponse registerUser(@Valid @RequestBody RegisterRequestModel model, Authentication auth)
    {
 	    try 
 	    {
@@ -78,7 +79,7 @@ public class UserController
    
    //get All User
    @GetMapping("/all")
-   public ApiResponse getAllUser()
+   public ApiResponse getAllUser(Authentication auth)
    {
 	   try 
 	   {
