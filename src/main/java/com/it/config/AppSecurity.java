@@ -20,15 +20,27 @@ public class AppSecurity
 	       req
 	       .requestMatchers("/users/login").permitAll()
 	       .requestMatchers("/users/register","/users/all").hasRole("ADMIN")
+	       
+	       //Branch
 	       .requestMatchers("/branch/add", "/branch/update/**").hasAnyRole("ADMIN", "MANAGER")
            .requestMatchers("/branch/delete/**").hasRole("ADMIN")
            .requestMatchers("/branch/get/**", "/branch/getAll").hasAnyRole("ADMIN","MANAGER","RECEPTIONIST")
+           
+           //Staff
            .requestMatchers("/staffs/add", "/staffs/update/**").hasAnyRole("ADMIN","MANAGER")
            .requestMatchers("/staffs/delete/**").hasRole("ADMIN")
            .requestMatchers("/staffs/get/**", "/staffs/getAll").hasAnyRole("ADMIN","MANAGER","RECEPTIONIST")
+           
+           //Sales
            .requestMatchers("/sales/add", "/sales/update/**").hasAnyRole("ADMIN", "MANAGER")
            .requestMatchers("/sales/delete/**").hasRole("ADMIN")
            .requestMatchers("/sales/get/**", "/sales/getAll").hasAnyRole("ADMIN", "MANAGER", "RECEPTIONIST")
+           
+           //Dispatch
+           .requestMatchers("/dispatch/add", "/dispatch/update/**").hasAnyRole("ADMIN", "MANAGER")
+           .requestMatchers("/dispatch/delete/**").hasRole("ADMIN")
+           .requestMatchers("/dispatch/get/**", "/dispatch/getAll").hasAnyRole("ADMIN", "MANAGER", "RECEPTIONIST")
+
            .anyRequest().authenticated()
 	       );
 	       http.addFilterBefore(authFilter,UsernamePasswordAuthenticationFilter.class);

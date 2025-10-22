@@ -61,8 +61,8 @@ public class StaffService
 		  staff.setType(model.getType());
 		  staff.setSalaryType(model.getSalaryType());
 		  staff.setBaseSalary(model.getBaseSalary());
-		  staff.setUser(opUser.get());
-		  staff.setBranch(opBranch.get());
+		  staff.setUserId(opUser.get());
+		  staff.setBranchId(opBranch.get());
 		  
 		  staffRepository.save(staff);
 		  return new ApiResponse(true,"Staff Added Successfully !",null);
@@ -96,14 +96,14 @@ public class StaffService
 			{
 				return new ApiResponse(false,"User Id Not Found",null);
 			}
-            staff.setUser(opUser.get());
+            staff.setUserId(opUser.get());
             
 			Optional<Branch> opBranch = branchRepository.findById(model.getBranchId());
 			if(opBranch.isEmpty())
 			{
 				return new ApiResponse(false,"Branch Id Not Found",null);
 			}
-            staff.setBranch(opBranch.get());
+            staff.setBranchId(opBranch.get());
             
 			staffRepository.save(staff);
 			return new ApiResponse(true,"Staff Update Successfully !", null);
@@ -168,8 +168,8 @@ public class StaffService
 		{
 			Staff st = op.get();
 			
-			st.setBranch(null);
-			st.setUser(null);
+			st.setBranchId(null);
+			st.setUserId(null);
 			staffRepository.save(st);
 			staffRepository.deleteById(id);
 			

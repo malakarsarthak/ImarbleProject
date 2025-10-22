@@ -32,11 +32,20 @@ public class Staff
   @Column(name = "Name", nullable = false)
   private String name;
   
+  @Column(name = "Mobile", nullable = false, unique = true)
+  private String mobile;
+  
   @Column(name = "Address", nullable = false, unique = true)
   private String address;
   
-  @Column(name = "Mobile", nullable = false, unique = true)
-  private String mobile;
+  @Column(name="Type", nullable = false)
+  private String type;
+  
+  @Column(name="SalaryType", nullable = false)
+  private String salaryType;
+  
+  @Column(name="BaseSalary", nullable = false)
+  private Float baseSalary;
   
   @Column(name="JoiningDate", nullable = false)
   private LocalDate joiningDate;
@@ -44,22 +53,13 @@ public class Staff
   @Column(name="LeavingDate", nullable = false)
   private LocalDate LeavingDate;
   
-  @Column(name="Type", nullable = false)
-  private String type;
-
-  @Column(name="SalaryType", nullable = false)
-  private String salaryType;
-
-  @Column(name="BaseSalary", nullable = false)
-  private Float baseSalary;
-
-  @ManyToOne
-  @JoinColumn(name = "branchid")
-  private Branch branch;
-  
   @OneToOne
   @JoinColumn(name = "userid")
-  private User user;
+  private User userId;
+  
+  @ManyToOne
+  @JoinColumn(name = "branchid")
+  private Branch branchId;
   
   @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<StaffAttendance> satffAttendance;
@@ -72,5 +72,4 @@ public class Staff
   
   @OneToMany(mappedBy = "dispatcher", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<SalesDispatch> salesDispatchs;
-
 }

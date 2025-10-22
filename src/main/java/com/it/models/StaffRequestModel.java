@@ -42,7 +42,7 @@ public class StaffRequestModel
    private Float  baseSalary;
    
    @NotNull(message = "Joining Date Not Null")
-   @JsonFormat(pattern = "dd/MM/yyyy") 
+   @JsonFormat(pattern = "yyyy-MM-dd") 
    private LocalDate joiningDate;
    
   

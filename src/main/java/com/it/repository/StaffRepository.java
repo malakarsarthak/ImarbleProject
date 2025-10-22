@@ -12,5 +12,5 @@ public interface StaffRepository extends JpaRepository<Staff, Integer>
 {
 
 	Optional<Staff> findByMobile(String mobile);
-
+	Optional<Staff> findById(Integer staffId);
 }

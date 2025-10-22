@@ -43,7 +43,7 @@ public class User implements UserDetails
    @Column(name = "Status", nullable = false)
    private boolean status;
    
-   @OneToOne(mappedBy = "user")
+   @OneToOne(mappedBy = "userId")
    private Staff staff;
 
    public Collection<? extends GrantedAuthority> getAuthorities() 

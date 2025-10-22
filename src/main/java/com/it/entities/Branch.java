@@ -35,9 +35,9 @@ public class Branch
    @Column(name = "Status", nullable = false)
    private boolean status;
    
-   @OneToMany(mappedBy = "branch")
+   @OneToMany(mappedBy = "branchId")
    private List<Staff> staff;
    
    @OneToMany(mappedBy = "branchid")
-   private List<Sales> sales;
+   private List<Sales> salesId;
 }
