@@ -41,6 +41,9 @@ public class AppSecurity
            .requestMatchers("/dispatch/delete/**").hasRole("ADMIN")
            .requestMatchers("/dispatch/get/**", "/dispatch/getAll").hasAnyRole("ADMIN", "MANAGER", "RECEPTIONIST")
 
+           //Dispatch Items
+           .requestMatchers("/dispatchitem/**").hasAnyRole("ADMIN", "MANAGER")
+
            .anyRequest().authenticated()
 	       );
 	       http.addFilterBefore(authFilter,UsernamePasswordAuthenticationFilter.class);

@@ -20,7 +20,7 @@ public class DispatchItems
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name  = "DispatchItemId")
-   private Integer DispatchItemId;
+   private Integer dispatchItemId;
    
    @ManyToOne()
    @JoinColumn(name = "DispatchId", nullable = false)
