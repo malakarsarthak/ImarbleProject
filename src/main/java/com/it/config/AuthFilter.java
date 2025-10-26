@@ -68,7 +68,7 @@ public class AuthFilter extends OncePerRequestFilter {
                 writeError(response, HttpStatus.UNAUTHORIZED, "Authorization Header Missing!");
             }
         } catch (Exception e) {
-            writeError(response, HttpStatus.UNAUTHORIZED, "Token Expired or Invalid!");
+        	writeError(response, HttpStatus.UNAUTHORIZED, "Token Expired or Invalid!");
         }
     }
 

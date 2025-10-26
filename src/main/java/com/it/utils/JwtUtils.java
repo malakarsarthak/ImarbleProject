@@ -13,7 +13,7 @@ public class JwtUtils
 			+ "8bbc241f255a6b34ae325a1f5b08527152f6f38b36a817a40bca3014930665748bbc"
 			+ "241f255a6b34ae325a1f5b08527152f6f38b36a817a40bca30";
 	
-	private  static final int limit = 1000*60*10;
+	private  static final int limit = 1000 * 60 * 60 * 24; 
 		
 	public static String createToken(Integer userId) 
 	{
@@ -34,13 +34,23 @@ public class JwtUtils
 	
 	public static boolean isvalid(String token)
 	{
-		Claims clm = extractAllClaims(token);
-		return !clm.getExpiration().before(new Date());
+		try 
+		{
+			Claims clm = extractAllClaims(token);
+			return !clm.getExpiration().before(new Date());
+		} 
+		catch (Exception e) 
+		{
+			return false;
+		}
 	}
 	
 	private static Claims extractAllClaims(String token) 
 	{
-	    return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+	    return Jwts.parser()
+	    		.setSigningKey(SECRET_KEY)
+	    		.parseClaimsJws(token)
+	    		.getBody();
 	} 
 
 }
